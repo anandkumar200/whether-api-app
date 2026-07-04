@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Weather</title>
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌤 Cool Weather</h1>
+
+        <form action="/report" method="post">
+            <input type="number" name="lat" step="any" placeholder="Latitude" required>
+
+            <input type="number" name="long" step="any" placeholder="Longitude" required>
+
+            <button>Search</button>
+        </form>
+
+        <% if(locals.descr){ %>
+
+            <div class="card">
+
+                <img src="https://openweathermap.org/img/wn/<%= descr.weather[0].icon %>@4x.png">
+
+                <h2>
+                    <%= Math.round(descr.main.temp) %>°C
+                </h2>
+
+                <h3>
+                    <%= descr.weather[0].main %>
+                </h3>
+
+                <p class="city">
+                    📍 <%= descr.name %>, <%= descr.sys.country %>
+                </p>
+
+                <p class="description">
+                    <%= descr.weather[0].description %>
+                </p>
+
+                <div class="details">
+
+                    <div class="box">
+                        <span>💧</span>
+                        <h4>Humidity</h4>
+                        <p>
+                            <%= descr.main.humidity %>%
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <span>🌬</span>
+                        <h4>Wind</h4>
+                        <p>
+                            <%= descr.wind.speed %> m/s
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <span>🌡</span>
+                        <h4>Feels Like</h4>
+                        <p>
+                            <%= Math.round(descr.main.feels_like) %>°C
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <span>🎯</span>
+                        <h4>Pressure</h4>
+                        <p>
+                            <%= descr.main.pressure %> hPa
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <span>👀</span>
+                        <h4>Visibility</h4>
+                        <p>
+                            <%= descr.visibility/1000 %> km
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <span>☁</span>
+                        <h4>Clouds</h4>
+                        <p>
+                            <%= descr.clouds.all %>%
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% } %>
+
+    </div>
+
+</body>
+
+</html>
